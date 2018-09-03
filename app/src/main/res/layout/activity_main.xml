@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <com.example.naruto.mycheckbox.MyCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:button="@null"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawablePadding="5dp"
+        android:text="测试"
+        app:drawableHeight="20dp"
+        app:drawableWidth="20dp" />
 
 </RelativeLayout>

@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 /**
- * @Purpose
+ * @Purpose 支持设置drawable尺寸
  * @Author Naruto Yang
  * @CreateDate 2018/8/22 0022
  * @Note
@@ -45,34 +45,17 @@ public class MyCheckBox extends android.support.v7.widget.AppCompatCheckBox {
         //从TypedArray中取出对应的值来为要设置的属性赋值
         drawableWidth = ta.getDimensionPixelSize(R.styleable.MyCheckBox_drawableWidth, 0);
         drawableHeight = ta.getDimensionPixelSize(R.styleable.MyCheckBox_drawableHeight, 0);
+        Rect rect = new Rect(0, 0, drawableWidth, drawableHeight);
         if (drawableWidth > 0 || drawableHeight > 0) {
-            for (Drawable drawable : getCompoundDrawables()) {
+            Drawable[] drawables = getCompoundDrawables();
+            int count = drawables.length;
+            for (int i = 0; i < count; i++) {
+                Drawable drawable=drawables[i];
                 if (drawable != null) {
-
+                    drawable.setBounds(rect);
                 }
             }
+            setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
         }
-    }
-
-    /**
-     * 缩放Bitmap
-     *
-     * @param bm
-     * @param newWidth
-     * @param newHeight
-     * @return
-     */
-    public Bitmap resetBitmapSize(Bitmap bm, int newWidth, int newHeight) {
-        // 获得图片的宽高
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        // 计算缩放比例
-        float scaleWidth = newWidth == 0 ? 1 : (float) newWidth / width;
-        float scaleHeight = newHeight == 0 ? 1 : (float) newHeight / height;
-        // 取得想要缩放的matrix参数
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        // 得到新的图片
-        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
     }
 }
